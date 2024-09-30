@@ -5,8 +5,8 @@ ruby "3.2.2"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.4"
 
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 1.4"
+# Use mysql as the database for Active Record
+gem "mysql2", "~> 0.5"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
@@ -15,7 +15,7 @@ gem "puma", ">= 5.0"
 # gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-# gem "redis", ">= 4.0.1"
+gem "redis", ">= 4.0.1"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -33,15 +33,67 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
-# gem "rack-cors"
+gem "rack-cors"
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ]
+  # Debugging
+  gem "pry-byebug"
+  gem "pry-rails"
+
+  # Convention
+  gem "rubocop", require: false
+  gem "rubocop-performance"
+  gem "rubocop-rspec"
+  gem "rubocop-rake"
+
+  # Unit Test
+  gem "rspec"
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "database_cleaner"
+  gem "faker", git: "https://github.com/faker-ruby/faker.git", branch: "main"
 end
 
 group :development do
-  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  # Schema in model
+  gem "annotate"
 end
 
+group :test do
+  # Use system testing
+  gem "shoulda-matchers", "~> 3.1"
+  gem "simplecov", require: false
+end
+
+# Environment variables
+gem "dotenv-rails"
+
+# Authentication
+gem "devise"
+gem "devise-jwt"
+gem "oauth"
+
+# Paginate
+gem "pagy"
+
+# Search
+gem "ransack"
+
+# background jobs
+gem "sidekiq", "~> 6.5", ">= 6.5.7"
+gem "sidekiq-status"
+
+# Strip attribute before commit
+gem "strip_attributes"
+
+# Config common variables
+gem "config"
+
+# Docs API
+gem "rswag"
+
+# Api json serializer
+gem "jsonapi-serializer"
+
+# Request third party api
+gem "httparty"
